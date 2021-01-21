@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Conversations\FirstConversation;
+use App\Conversations\GetDataConversation;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Cache\LaravelCache;
@@ -41,6 +41,8 @@ class BotManController extends Controller
 
         // Load the driver(s) you want to use
         DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramDriver::class);
+        DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramLocationDriver::class);
+        DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramContactDriver::class);
 
         // Create an instance
         $botman = BotManFactory::create($config, new LaravelCache());
@@ -48,9 +50,9 @@ class BotManController extends Controller
         // Give the bot something to listen for.
         $botman->hears('{message}', function($botman, $message) {
             if ($message == '/start') {
-                $botman->startConversation(new FirstConversation());
+                $botman->startConversation(new GetDataConversation());
             } else {
-                $botman->reply("Напишите '/start' для теста...");
+                $botman->reply("Напишите '/start' для того чтобы начать общение.");
             }
         });
 
@@ -60,7 +62,7 @@ class BotManController extends Controller
         });
 
         $botman->fallback(function($bot) {
-            $bot->reply('Sorry, I did not understand you. Just type start to continue.');
+            $bot->reply('Извините. Я не понял Вас. Нажмите /start для того чтобы начать общение.');
         });
 
         // Start listening

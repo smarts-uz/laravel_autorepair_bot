@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTelegramUsersDataTable extends Migration
+class CreateApplicationFromFormsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateTelegramUsersDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('telegram_users_data', function (Blueprint $table) {
+        Schema::create('application_from_forms', function (Blueprint $table) {
             $table->id();
 
             $table->string('name', 255)->nullable();
+            $table->text('message')->nullable();
             $table->string('phone_number', 255)->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
-            $table->integer('user_telegram_id')->unsigned();
+            $table->integer('user_telegram_id')->unsigned()->nullable();
+            $table->string('type')->nullable();
+            $table->text('service_name')->nullable();
 
             $table->timestamps();
         });
@@ -33,6 +36,6 @@ class CreateTelegramUsersDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('telegram_users_data');
+        Schema::dropIfExists('application_from_forms');
     }
 }

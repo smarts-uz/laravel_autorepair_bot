@@ -8,6 +8,7 @@
     ],
     "license": "MIT",
     "require": {
+        "ext-json": "*",
         "php": "^7.3|^8.0",
         "botman/botman": "^2.6",
         "botman/driver-telegram": "^1.6",
