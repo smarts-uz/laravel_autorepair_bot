@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
@@ -16,10 +17,10 @@ class WebsiteController extends Controller
     {
         // Get all need data's
         $data = [
-            'categories' => Category::latest()->get()
+            'category' => Category::where('name', 'like', '%Автомо%')->with(['lists', 'services', 'our_works'])->first()
         ];
 
-        return view('welcome', $data);
+        return view('front.pages.index', $data);
     }
 
     /**
@@ -33,10 +34,56 @@ class WebsiteController extends Controller
     {
         // Get all needed data's
         $data = [
-            'categories' => Category::latest()->get(),
-            'category' => Category::where('slug', $slug)->with(['lists'])->first()
+            'category' => Category::where('slug', $slug)->with(['lists', 'services', 'our_works'])->first()
         ];
 
         return view('category', $data);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function prices()
+    {
+        // Get all needed data's
+        $data = [
+            'categories' => Category::orderBy('id', 'asc')->with(['lists', 'our_works', 'services'])->get()
+        ];
+
+        return view('front.pages.prices', $data);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function reviews()
+    {
+        // Get all needed data's
+        $data = [
+            'reviews' => Reviews::latest()->get()
+        ];
+
+        return view('front.pages.reviews', $data);
+    }
+
+    public function saveReview(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'phone_number' => 'required|max:255',
+            'message' => 'required',
+        ]);
+
+        Reviews::create($request->all());
+
+        return redirect()->back();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function contacts()
+    {
+        return view('front.pages.contacts');
     }
 }

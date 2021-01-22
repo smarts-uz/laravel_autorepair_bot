@@ -19,7 +19,7 @@ class BotManController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function webView()
+    public function telegramWebView()
     {
         return view('telegram');
     }

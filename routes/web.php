@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\WebsiteController::class, 'index'])->name('website.index');
-Route::get('/telegram', [\App\Http\Controllers\BotManController::class, 'webView'])->name('website.index');
-Route::get('/category/{slug}', [\App\Http\Controllers\WebsiteController::class, 'category'])->name('website.category');
+Route::group([
+    'as' => 'website.'
+], function () {
+    Route::get('/', [\App\Http\Controllers\WebsiteController::class, 'index'])->name('index');
+    Route::get('/category/{slug}', [\App\Http\Controllers\WebsiteController::class, 'category'])->name('category');
+    Route::get('/prices', [\App\Http\Controllers\WebsiteController::class, 'prices'])->name('prices');
+    Route::get('/reviews', [\App\Http\Controllers\WebsiteController::class, 'reviews'])->name('reviews');
+    Route::post('/reviews', [\App\Http\Controllers\WebsiteController::class, 'saveReview'])->name('reviews.save');
+    Route::get('/contacts', [\App\Http\Controllers\WebsiteController::class, 'contacts'])->name('contacts');
+});
+
+Route::get('/telegram', [\App\Http\Controllers\BotManController::class, 'telegramWebView'])->name('telegram.index');
 
 Route::match(['get', 'post'], '/botman', [\App\Http\Controllers\BotManController::class,'handle']);
 

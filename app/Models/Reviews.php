@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Reviews extends Model
 {
     use HasFactory;
+
+    /**
+     * Fillable properties
+     *
+     * @var string[]
+     */
+    public $fillable = [
+        'name', 'phone_number', 'message'
+    ];
 }
