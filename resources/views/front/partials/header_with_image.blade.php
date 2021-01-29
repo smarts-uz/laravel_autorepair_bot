@@ -26,7 +26,7 @@
                 <div class="header-main flex text-white items-center justify-between ">
 
                     <div class="logo cursor-pointer">
-                        <a href="/pages/index.html">
+                        <a href="{{ route('website.index') }}">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABwCAYAAACkRk1NAAAACXBIWXMAA
                     BYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAABSqSURBVHgB7Z0JtB5FlcfvyyJbwpoIJAT
                     C5gKCMkMgbE5AGISBiMrRgwTIBIEADsLAwIQwI4qiDEZACShIAgiCrIIjm4JswpAhSmSJSDIJEGRzRhCCAZJ35/9P9

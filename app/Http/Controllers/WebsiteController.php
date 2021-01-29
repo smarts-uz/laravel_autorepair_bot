@@ -16,11 +16,12 @@ class WebsiteController extends Controller
     public function index()
     {
         // Get all need data's
-        $data = [
-            'category' => Category::where('name', 'like', '%Автомо%')->with(['lists', 'services', 'our_works'])->first()
-        ];
+//        $data = [
+//            'category' => Category::where('name', 'like', '%Автомо%')->with(['lists', 'services', 'our_works'])->first()
+//        ];
 
         return view('front.pages.index', $data);
+        return view('welcome');
     }
 
     /**
