@@ -5,7 +5,7 @@
                 <div class="header-main flex text-white items-center justify-between ">
 
                     <div class="logo cursor-pointer">
-                        <a href="/pages/index.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABwCAYAAACkRk1NAAAACXBIWXMAA
+                        <a href="{{ route('website.index') }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABwCAYAAACkRk1NAAAACXBIWXMAA
                      BYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAABSqSURBVHgB7Z0JtB5FlcfvyyJbwpoIJAT
                      C5gKCMkMgbE5AGISBiMrRgwTIBIEADsLAwIQwI4qiDEZACShIAgiCrIIjm4JswpAhSmSJSDIJEGRzRhCCAZJ35/9P9
                      Tt86ddVX6/vdX/v/s65p5NX1dVV3V9XV926da+IYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRg56
