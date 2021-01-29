@@ -20,7 +20,7 @@ class WebsiteController extends Controller
 //            'category' => Category::where('name', 'like', '%Автомо%')->with(['lists', 'services', 'our_works'])->first()
 //        ];
 
-        return view('front.pages.index', $data);
+//        return view('front.pages.index', $data);
         return view('welcome');
     }
 
