@@ -111,27 +111,4 @@ class GetDataConversation extends Conversation
             ])
         ]);
     }
-
-    /**
-     * Get telegram user data
-     *
-     * @return mixed
-     */
-    public function getUserData()
-    {
-        // Get bot user
-        $user = $this->getBot()->getUser();
-        // Check is the user exists in database
-        // If exists create new user
-        // else return user
-        if (!$db_user = ApplicationFromForm::where('user_telegram_id', $user->getId())->first()) {
-            return ApplicationFromForm::create([
-                'user_telegram_id' => $user->getId(),
-                'type' => 'telegram'
-            ]);
-        }else{
-            return $db_user;
-        }
-    }
-
 }

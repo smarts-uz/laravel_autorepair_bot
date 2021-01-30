@@ -65,6 +65,14 @@ class BotManController extends Controller
             $bot->reply('Извините. Я не понял Вас. Нажмите /start для того чтобы начать общение.');
         });
 
+        $botman->exception(\Exception::class, function($exception, $bot) {
+            \Illuminate\Support\Facades\Log::info("Exception");
+            $bot->reply('Sorry, something went wrong');
+
+            if (method_exists($bot->getDriver(), 'messagesHandled'))
+                $bot->getDriver()->messagesHandled();
+        });
+
         // Start listening
         $botman->listen();
     }
