@@ -8,7 +8,9 @@ use App\Models\ApplicationFromForm;
 use BotMan\BotMan\Messages\Attachments\Location;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 use Illuminate\Support\Facades\DB;
+
 
 class GetDataConversation extends Conversation
 {
@@ -32,6 +34,7 @@ class GetDataConversation extends Conversation
             $this->getBot()->userStorage()->save([
                 'name' => $answer->getText()
             ]);
+
             $name = $answer->getText();
             $this->say('Приятно познакомиться ' . $name);
             $this->askPhoneNumber();
@@ -78,17 +81,28 @@ class GetDataConversation extends Conversation
     public function askLocation()
     {
         $this->askForLocation('Пожалуйста отправьте свою локацию.', function (Location $location) {
-            $this->getBot()->userStorage()->save([
-                'longitude' => $location->getLongitude(),
+
+            $message = 'Имя: ' . $this->getBot()->userStorage()->get('name') . PHP_EOL;
+            $message .= 'Номер телефона: ' . $this->getBot()->userStorage()->get('phone_number') . PHP_EOL;
+            $message .= 'Локация: ';
+
+            $this->getBot()->sendRequest('sendMessage', [
+                'chat_id' => '-1001379566831',
+                'text' => $message
+            ]);
+
+            $this->getBot()->sendRequest( 'sendLocation', [
+                'chat_id' => -1001379566831,
                 'latitude' => $location->getLatitude(),
+                'longitude' => $location->getLongitude()
             ]);
 
             $item = DB::table('andradedev_subscribe_subscribers')->latest()->first();
 
             DB::table('andradedev_subscribe_subscribers')->insert([
                 'email' => 'from@telegram.com' . $item->id,
-                'latitude' => $this->getBot()->userStorage()->get('latitude'),
-                'longitude' => $this->getBot()->userStorage()->get('longitude'),
+                'latitude' => $location->getLatitude(),
+                'longitude' => $location->getLongitude(),
                 'status' => 1,
                 'name' => $this->getBot()->userStorage()->get('name'),
                 'surname' => $this->getBot()->userStorage()->get('phone_number'),
@@ -101,7 +115,7 @@ class GetDataConversation extends Conversation
             return true;
         }, function () {
             $this->say('Извините, вы не отправили локацию.');
-            $this->askLocation();
+            $this->askFirstname();
         }, [
             'reply_markup' => json_encode([
                 'keyboard' => [

@@ -56,18 +56,14 @@ class BotManController extends Controller
             }
         });
 
-        $botman->receivesLocation(function (Location $location) {
-            Log::info(print_r($location, true));
-            return true;
-        });
-
         $botman->fallback(function($bot) {
             $bot->reply('Извините. Я не понял Вас. Нажмите /start для того чтобы начать общение.');
         });
 
         $botman->exception(\Exception::class, function($exception, $bot) {
             \Illuminate\Support\Facades\Log::info($exception);
-            $bot->reply('Sorry, something went wrong');
+            $bot->reply('Извините! Серверная ошибка. Попробуйте заного.');
+            $bot->startConversation(new GetDataConversation());
 
             if (method_exists($bot->getDriver(), 'messagesHandled'))
                 $bot->getDriver()->messagesHandled();
