@@ -83,15 +83,15 @@ class GetDataConversation extends Conversation
                 'latitude' => $location->getLatitude(),
             ]);
 
-            DB::table('andradedev_subscribe_subscribers')->insert([
-                'latitude' => $this->getBot()->userStorage()->get('latitude'),
-                'longitude' => $this->getBot()->userStorage()->get('longitude'),
-                'status' => 1,
-                'name' => $this->getBot()->userStorage()->get('name'),
-                'surname' => $this->getBot()->userStorage()->get('phone_number'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+//            DB::table('andradedev_subscribe_subscribers')->insert([
+//                'latitude' => $this->getBot()->userStorage()->get('latitude'),
+//                'longitude' => $this->getBot()->userStorage()->get('longitude'),
+//                'status' => 1,
+//                'name' => $this->getBot()->userStorage()->get('name'),
+//                'surname' => $this->getBot()->userStorage()->get('phone_number'),
+//                'created_at' => now(),
+//                'updated_at' => now(),
+//            ]);
 
             $this->say('Спасибо! Скоро мы свяжемся.');
             $this->say('Нажмите /start для того чтобы начать заного.');
