@@ -100,7 +100,7 @@ class GetDataConversation extends Conversation
             $item = DB::table('andradedev_subscribe_subscribers')->latest()->first();
 
             DB::table('andradedev_subscribe_subscribers')->insert([
-                'email' => 'from@telegram.com' . ($item->id ? $item->id : 1),
+                'email' => 'from@telegram.com' . (isset($item->id) ? $item->id : 1),
                 'latitude' => $location->getLatitude(),
                 'longitude' => $location->getLongitude(),
                 'status' => 1,
