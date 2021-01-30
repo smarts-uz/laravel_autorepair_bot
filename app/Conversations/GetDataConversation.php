@@ -83,8 +83,10 @@ class GetDataConversation extends Conversation
                 'latitude' => $location->getLatitude(),
             ]);
 
+            $item = DB::table('andradedev_subscribe_subscribers')->latest()->first();
+
             DB::table('andradedev_subscribe_subscribers')->insert([
-                'email' => 'from@telegram.com',
+                'email' => 'from@telegram.com' . $item->id,
                 'latitude' => $this->getBot()->userStorage()->get('latitude'),
                 'longitude' => $this->getBot()->userStorage()->get('longitude'),
                 'status' => 1,
