@@ -19,7 +19,6 @@ class GetDataConversation extends Conversation
      */
     public function run()
     {
-        $user = $this->getUserData();
         $this->askFirstname();
     }
 
