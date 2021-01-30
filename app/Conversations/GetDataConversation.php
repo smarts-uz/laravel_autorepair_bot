@@ -8,6 +8,7 @@ use App\Models\ApplicationFromForm;
 use BotMan\BotMan\Messages\Attachments\Location;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
+use Illuminate\Support\Facades\DB;
 
 class GetDataConversation extends Conversation
 {
@@ -83,9 +84,15 @@ class GetDataConversation extends Conversation
                 'latitude' => $location->getLatitude(),
             ]);
 
-            
-
-            $this->say(print_r($this->getBot()->userStorage()->all(), true));
+            DB::table('andradedev_subscribe_subscribers')->insert([
+                'latitude' => $this->getBot()->userStorage()->get('latitude'),
+                'longitude' => $this->getBot()->userStorage()->get('longitude'),
+                'status' => 1,
+                'name' => $this->getBot()->userStorage()->get('name'),
+                'surname' => $this->getBot()->userStorage()->get('phone_number'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
             $this->say('Спасибо! Скоро мы свяжемся.');
             $this->say('Нажмите /start для того чтобы начать заного.');
