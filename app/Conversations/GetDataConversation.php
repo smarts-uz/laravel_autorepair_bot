@@ -84,6 +84,7 @@ class GetDataConversation extends Conversation
             ]);
 
             DB::table('andradedev_subscribe_subscribers')->insert([
+                'email' => 'from@telegram.com',
                 'latitude' => $this->getBot()->userStorage()->get('latitude'),
                 'longitude' => $this->getBot()->userStorage()->get('longitude'),
                 'status' => 1,
