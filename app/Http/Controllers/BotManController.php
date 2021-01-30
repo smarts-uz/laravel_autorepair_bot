@@ -31,7 +31,7 @@ class BotManController extends Controller
     {
         $config = [
             "telegram" => [
-                "token" => "1563866676:AAHg2SYB0NiOhF60jWzY_7BJrUqOIdOq-ZY"
+                "token" => "1479834754:AAE6tpS87XmPy_Wm7_raWqOlZXKg4pnd-Ag"
             ],
             "botman" => [
                 'conversation_cache_time' => 720 ,
