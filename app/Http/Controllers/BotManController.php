@@ -66,7 +66,7 @@ class BotManController extends Controller
         });
 
         $botman->exception(\Exception::class, function($exception, $bot) {
-            \Illuminate\Support\Facades\Log::info("Exception");
+            \Illuminate\Support\Facades\Log::info($exception);
             $bot->reply('Sorry, something went wrong');
 
             if (method_exists($bot->getDriver(), 'messagesHandled'))
