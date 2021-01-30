@@ -17,6 +17,7 @@ Route::group([
     'as' => 'website.'
 ], function () {
     Route::get('/', [\App\Http\Controllers\WebsiteController::class, 'index'])->name('index');
+    Route::get('/test', [\App\Http\Controllers\WebsiteController::class, 'index'])->name('index');
     Route::get('/category/{slug}', [\App\Http\Controllers\WebsiteController::class, 'category'])->name('category');
     Route::get('/prices', [\App\Http\Controllers\WebsiteController::class, 'prices'])->name('prices');
     Route::get('/reviews', [\App\Http\Controllers\WebsiteController::class, 'reviews'])->name('reviews');

@@ -29,8 +29,7 @@ class GetDataConversation extends Conversation
     {
         $this->ask('Привет! Как Ваше имя?', function(Answer $answer) {
 
-            $user = $this->getUserData();
-            $user->update([
+            $this->getBot()->userStorage()->save([
                 'name' => $answer->getText()
             ]);
             $name = $answer->getText();
@@ -47,15 +46,14 @@ class GetDataConversation extends Conversation
     {
         $this->ask('Ваш номер телефона', function (Answer $answer) {
 
-            $user = $this->getUserData();
             try {
                 $contact = $answer->getMessage()->getContact()->getPhoneNumber();
-                $user->update([
+                $this->getBot()->userStorage()->save([
                     'phone_number' => $contact
                 ]);
             }catch (\Exception $e){
                 $contact = $answer->getMessage()->getText();
-                $user->update([
+                $this->getBot()->userStorage()->save([
                     'phone_number' => $contact
                 ]);
             }
@@ -80,12 +78,15 @@ class GetDataConversation extends Conversation
     public function askLocation()
     {
         $this->askForLocation('Пожалуйста отправьте свою локацию.', function (Location $location) {
-            $user = $this->getUserData();
-            $user->update([
+            $this->getBot()->userStorage()->save([
                 'longitude' => $location->getLongitude(),
                 'latitude' => $location->getLatitude(),
-                'updated_at' => now()
             ]);
+
+            
+
+            $this->say(print_r($this->getBot()->userStorage()->all(), true));
+
             $this->say('Спасибо! Скоро мы свяжемся.');
             $this->say('Нажмите /start для того чтобы начать заного.');
             return true;
