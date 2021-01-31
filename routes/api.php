@@ -18,7 +18,7 @@ use BotMan\BotMan\Drivers\DriverManager;
 */
 
 Route::match(['get', 'post'], '/webhook', [\App\Http\Controllers\BotManController::class, 'handle']);
-Route::match(['get', 'post'], '/sendMessage', [\App\Http\Controllers\BotManController::class, 'handle']);
+Route::match(['get', 'post'], '/sendMessage', [\App\Http\Controllers\BotManController::class, 'sendMessage']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
