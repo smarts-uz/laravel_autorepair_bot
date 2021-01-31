@@ -72,4 +72,29 @@ class BotManController extends Controller
         // Start listening
         $botman->listen();
     }
+
+    public function sendMessage(Request $request)
+    {
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+        $config = [
+            "telegram" => [
+                "token" => "1479834754:AAE6tpS87XmPy_Wm7_raWqOlZXKg4pnd-Ag"
+            ],
+            "botman" => [
+                'conversation_cache_time' => 720 ,
+                'user_cache_time' => 720,
+            ],
+        ];
+
+        // Create an instance
+        $botman = BotManFactory::create($config);
+        $botman->sendRequest('sendMessage', [
+            'chat_id' => '-1001379566831',
+            'text' => $request->get('message')
+        ]);
+
+    }
 }
